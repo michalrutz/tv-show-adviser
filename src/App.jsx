@@ -34,7 +34,7 @@ export function App () {
     }
     async function getRecommandations(id) {
         const resRecommendations = await axios.get(`${BASE_URL}tv/${id}//recommendations${API_KEY}`);
-        setRecommandations(resRecommendations.data.results.slice(0,8));
+        setRecommandations(resRecommendations.data.results.slice(0,6));
         return resRecommendations;     
     }
 

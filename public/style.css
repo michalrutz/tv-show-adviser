@@ -48,6 +48,7 @@ input {
     border-color: rgb(216, 216, 216);
     border-style: solid;
     border-radius: 1.4rem;
+    outline: rgba(0, 0, 0, 0.2) solid 0.25rem;
 
     min-width: 24rem;
     font-size: 1.4rem;
@@ -75,14 +76,15 @@ input {
 }
 
 input:focus {
+    outline: rgba(0, 0, 0, 0.2) solid 0.25rem;
     animation: puls 5s ease-in-out infinite;
     transition: background-color 1s, border-color 2s, background-position 1s, transform 2s;
 }
 input:hover {
+    outline: rgba(0, 0, 0, 0.2) solid 0.25rem;
     border-color: rgba(120, 255, 120, 0.6);
     background-color: rgba(255, 255, 255, 0.4);
     transition: background-color 1s, border-color 1s,transform 1s, ;
-   
 }
 .sugestion{
     font-weight: 400;
@@ -101,6 +103,7 @@ input:hover {
     align-items: center;
 }
 .thumb{
+    max-width: 30rem;
     min-width: 20rem;
     min-height: 10rem;
 }

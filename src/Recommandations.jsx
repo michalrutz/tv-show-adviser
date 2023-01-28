@@ -9,14 +9,17 @@ export function Recommandations ({recs, getShowById}) {
  
 
    return <main>
-    <h2>You may also like:</h2>
-    <ul>
-       {recs.length!==0 ? 
+    <h2>You may also like</h2>
+        <div>
+        {recs.length!==0 ? 
             recs.map( r => {
-                return <a href="#wrapper"><li className={"thumb"} id={r.id} key={r.id} onClick={onClickRec} backgroundImage={`url(${BASE_URL_IMG}w500${r.backdrop_path})`}>
-                    <img className={"thumb"} src={`${BASE_URL_IMG}w500${r.backdrop_path}`} alt={r.name} />
-                </li></a> } 
+                return <a href="#wrapper">
+                <div className={"thumb"} id={r.id} key={r.id} onClick={onClickRec}>
+                    <img className={"thumb"}src={`${BASE_URL_IMG}w500${r.backdrop_path}`} alt={r.name} />
+                </div></a> } 
                 ) 
             : ""}
-   </ul></main>
+        </div>
+    
+  </main>
 }
