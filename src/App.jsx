@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { API_KEY, BASE_URL, BASE_URL_IMG } from "./config"
-import { Recommandations } from "./Recommandations"
+import { Reco } from "./Reco"
 import { Show } from "./Show"
 
 export function App () {
@@ -94,15 +94,18 @@ export function App () {
                     : ""}
                 </form>
         </header>
-        <section id="mid">
-            <Show show={show}/>
+        <main>
+               <Show show={show}/>
+        </main>
         <aside>
-            <Recommandations recs={recommenadations} getShowById={getShowById}/>
+            <h2>You may also like</h2>
+            <div className="gallery">
+                <Reco recs={recommenadations} getShowById={getShowById}/>
+            </div>
         </aside>
-        </section>
         <footer>
-            <div><p>made by <strong>Michal Rucinski</strong></p></div>
-            <div><p>all photos from www.themoviedb.org</p></div>
+            <p>made by <strong>Michal Rucinski</strong></p>
+            <p>all photos from www.themoviedb.org</p>
         </footer>
     </div>
     
