@@ -90,10 +90,28 @@ input:hover {
     align-self: flex-start;
 }
 
+#mid{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.thumb{
+    background-color: red;
+}
+
+
 main{
     max-width: 100rem;
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+aside *{
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    justify-content: center;
     align-items: center;
 }
 

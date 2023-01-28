@@ -9,52 +9,68 @@ export function App () {
     const [search, setSearch] = useState("")
     const [sugestion, setSugestion] = useState({})
     const [recommenadations, setRecommandations] = useState([])
+    const [feedback, setFeedback] = useState(true);
 
-    async function getPopularShows () {
-        //get top 20 popular shows
+    async function getPopularShows () {     //get top 20 popular shows
         const top = await axios.get(`${BASE_URL}tv/popular${API_KEY}`);
-        if (top.data.results.length!==0) {
-            setShow(top.data.results[0]); 
+        if (top.data.results.length!==0) {  //check if the array is empty
+            setShow(top.data.results[0]);   //assign the top show object
+            return top.data.results[0]      //pass the top show object
         }
     };
 
-    useEffect(()=> {getPopularShows()} ,[]); // z klamrami nie zwraca funkcji i nie ma error
+    useEffect(()=> { getPopularShows().then( (top) => {getRecommandations(top.id)} ) } ,[]); // z klamrami nie zwraca funkcji i nie ma error
 
-    async function onChangeSearch (e) {
-        let query = e.target.value.toLowerCase();
-        setSearch(query)    
-        //search API
-        try {           //search for the matches
-            const shows = await axios.get(`${BASE_URL}search/tv${API_KEY}&query=${query}`);
-            
-            if( shows.data.results.length===0){
-                setSugestion({});   console.log("no results!");
-            } else { //assign the data of the best match
-                setSugestion(shows.data.results[0])
-            }   
-        } catch (error) {
-            console.log("error:"+error);  
-        }
-        
+    async function getShowById(id) {
+        let newShow =  await axios.get(`${BASE_URL}tv/${id}aggregate_credits${API_KEY}`);
+        if(newShow.data.length!==0){
+            setShow(newShow.data);
+            getRecommandations(newShow.data.id)
+            setSearch("");
+            setSugestion({})
+            setFeedback(true)
+            console.log(newShow);
+            console.log("SUCCESSFUL REQUEST by ID")
+        }    
     }
     async function getRecommandations(id) {
         const resRecommendations = await axios.get(`${BASE_URL}tv/${id}//recommendations${API_KEY}`);
-        setRecommandations(resRecommendations.data.results.slice(0,5));
-        console.log(recommenadations)
+        setRecommandations(resRecommendations.data.results.slice(0,6));
         return resRecommendations;     
     }
+
+    async function onChangeSearch (e) {
+        setSearch(e.target.value)    
+        let query = e.target.value.trim().toLowerCase().replace(" ", "%20" ); //clean the query
+        if(query!==""){
+            console.log("QUERY:"+query);
+            const shows = await axios.get(`${BASE_URL}search/tv${API_KEY}&query=${query}`); //send request
+            if( shows.data.results.length===0){
+                setFeedback(false);
+                setSugestion({});   console.log("no results!");
+    
+            } else { //assign the data of the best match
+                setFeedback(true);
+
+                setSugestion(shows.data.results[0])
+            }
+        } else{
+            setFeedback(true);
+            setSugestion({});
+        }       
+    }
+   
+
+
 
     function onSubmitSearach(e) {
         e.preventDefault();
         if (Object.hasOwn(sugestion,"name") === false){
-            console.log("NO")
+            console.log("OBJECT has NO NAME")
         }
         //commit sugestion
         else {
-            getRecommandations(sugestion.id);
-            setShow(sugestion);
-            setSearch("");
-            setSugestion({})
+            getShowById(sugestion.id);
         }
     }
 
@@ -71,17 +87,23 @@ export function App () {
                     onChange={(e)=>onChangeSearch(e)} 
                     value={search}
                     autoFocus
+                    style={feedback ? {borderColor:"white"} : {borderColor: "rgba(150, 0, 0, 0.6)", animation:"none"}}
                 />
-                { sugestion.name && sugestion.name.length>2 ? <p className="sugestion">Looking for <strong>{sugestion.name}</strong>?</p> : <p className="sugestion">What tv-show you're looking for?</p>}    
+                { feedback ? "": <p className="sugestion">no match found</p>}
+                { sugestion.name && sugestion.name.length>2 
+                    ? <p className="sugestion">Looking for <strong>{sugestion.name}</strong>?</p> 
+                    : ""}
+                { !Object.hasOwn(sugestion,"name") && feedback
+                    ? <p className="sugestion">What are you looking for?</p> 
+                    : ""}
                 </form>
         </header>
-        <main>
-            <Show show={show}>
-            </Show>
-        </main>
+        <section id="mid">
+            <Show show={show}/>
         <aside>
-            <Recommandations recs={recommenadations}/>
+            <Recommandations recs={recommenadations} getShowById={getShowById}/>
         </aside>
+        </section>
         <footer>
             <div><p>made by <strong>Michal Rucinski</strong></p></div>
             <div><p>all photos from www.themoviedb.org</p></div>

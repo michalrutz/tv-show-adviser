@@ -1,10 +1,12 @@
+import { CreatedBy } from "./CreatedBy"
 
 export function Show ({show}) {
-    console.log(show);
+    console.log("SHOW successfuly passed to Show Component")
     return (<article>
         {show ? <>
             <h1>{show.name}</h1>
             <div className="details">
+            <CreatedBy created_by={show.created_by}/>
             <p>
                 <span className="detail">RATING: </span><strong>{show.vote_average/2}</strong>/5, 
                 <span className="detail"> VOTES: <strong>{show.vote_count}</strong></span>
