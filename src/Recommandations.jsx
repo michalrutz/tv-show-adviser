@@ -8,12 +8,14 @@ export function Recommandations ({recs, getShowById}) {
     }
  
 
-   return <main><ul>
+   return <main>
+    <h2>You may also like:</h2>
+    <ul>
        {recs.length!==0 ? 
             recs.map( r => {
-                return <li id={r.id} key={r.id} onClick={onClickRec}>
-                    <img style={{className:"thumb"}} src={`${BASE_URL_IMG}w500${r.backdrop_path}`} alt={r.name} />
-                </li> } 
+                return <a href="#wrapper"><li className={"thumb"} id={r.id} key={r.id} onClick={onClickRec} backgroundImage={`url(${BASE_URL_IMG}w500${r.backdrop_path})`}>
+                    <img className={"thumb"} src={`${BASE_URL_IMG}w500${r.backdrop_path}`} alt={r.name} />
+                </li></a> } 
                 ) 
             : ""}
    </ul></main>

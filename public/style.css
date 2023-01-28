@@ -16,8 +16,7 @@ body {
 }
 #wrapper {
     max-width: 144rem;
-    min-height: 50rem;
-    padding: 2rem;
+    padding: 1rem 2rem;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: top center;
@@ -29,9 +28,13 @@ body {
 }
 
 header{
+
+    
     display: flex;
     justify-content: center;
+
     margin: 0rem 1rem 3rem 1rem;
+    padding: 1rem 0 0 0;
 }
 form {
     display: flex;
@@ -83,7 +86,7 @@ input:hover {
 }
 .sugestion{
     font-weight: 400;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.7);
     padding: 0.1rem 0.5rem;
     margin: 0.5rem;
     border-radius: 0.5rem 0.5rem 0.5rem 0;
@@ -91,13 +94,15 @@ input:hover {
 }
 
 #mid{
+    padding-top: 10rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 .thumb{
-    background-color: red;
+    min-width: 20rem;
+    min-height: 10rem;
 }
 
 
@@ -114,6 +119,14 @@ aside *{
     justify-content: center;
     align-items: center;
 }
+h2{
+    color: white;
+    font-weight: 200;
+    background:rgba(0, 0, 0, 0.5);
+    margin: 2rem 0 0 0;
+    padding: 0.5rem 1rem;
+    border-radius:0.1rem;
+}
 
 article{
     display: flex;
@@ -124,7 +137,7 @@ article{
 
     border-radius: 0.5rem;
     max-width: 50rem;
-    min-width: 32rem;
+    min-width: 24rem;
 
     font-size: 1.2rem;
     font-weight:200;
@@ -146,6 +159,11 @@ article p {
 article strong {
     font-weight: 400;
 }
+.createdBy{
+    display: flex;
+    flex-direction: row;
+    padding: 0 1rem 0 0;
+}
 .details{
     display: flex;
     justify-content: space-between;
@@ -158,6 +176,7 @@ article strong {
     padding: 1rem 0.4rem 2rem 0.4rem;
 }
 footer  {
+    color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -14,12 +14,11 @@ export function App () {
     async function getPopularShows () {     //get top 20 popular shows
         const top = await axios.get(`${BASE_URL}tv/popular${API_KEY}`);
         if (top.data.results.length!==0) {  //check if the array is empty
-            setShow(top.data.results[0]);   //assign the top show object
-            return top.data.results[0]      //pass the top show object
+            getShowById(top.data.results[0].id)
         }
     };
 
-    useEffect(()=> { getPopularShows().then( (top) => {getRecommandations(top.id)} ) } ,[]); // z klamrami nie zwraca funkcji i nie ma error
+    useEffect(()=> { getPopularShows() },[]); // z klamrami nie zwraca funkcji i nie ma error
 
     async function getShowById(id) {
         let newShow =  await axios.get(`${BASE_URL}tv/${id}aggregate_credits${API_KEY}`);
@@ -35,7 +34,7 @@ export function App () {
     }
     async function getRecommandations(id) {
         const resRecommendations = await axios.get(`${BASE_URL}tv/${id}//recommendations${API_KEY}`);
-        setRecommandations(resRecommendations.data.results.slice(0,6));
+        setRecommandations(resRecommendations.data.results.slice(0,8));
         return resRecommendations;     
     }
 
@@ -59,9 +58,6 @@ export function App () {
             setSugestion({});
         }       
     }
-   
-
-
 
     function onSubmitSearach(e) {
         e.preventDefault();
@@ -86,7 +82,7 @@ export function App () {
                 <input id="search" type="text" name="search"
                     onChange={(e)=>onChangeSearch(e)} 
                     value={search}
-                    autoFocus
+                    autoFocus autocomplete="off"
                     style={feedback ? {borderColor:"white"} : {borderColor: "rgba(150, 0, 0, 0.6)", animation:"none"}}
                 />
                 { feedback ? "": <p className="sugestion">no match found</p>}
