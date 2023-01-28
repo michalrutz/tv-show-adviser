@@ -1,12 +1,14 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { API_KEY, BASE_URL, BASE_URL_IMG } from "./config"
+import { Recommandations } from "./Recommandations"
 import { Show } from "./Show"
 
 export function App () {
     const [show, setShow] = useState()
     const [search, setSearch] = useState("")
     const [sugestion, setSugestion] = useState({})
+    const [recommenadations, setRecommandations] = useState([])
 
     async function getPopularShows () {
         //get top 20 popular shows
@@ -19,23 +21,27 @@ export function App () {
     useEffect(()=> {getPopularShows()} ,[]); // z klamrami nie zwraca funkcji i nie ma error
 
     async function onChangeSearch (e) {
-        const value = e.target.value;
-        setSearch(value)
-        let query = value.toLowerCase();
+        let query = e.target.value.toLowerCase();
+        setSearch(query)    
         //search API
-        try {
+        try {           //search for the matches
             const shows = await axios.get(`${BASE_URL}search/tv${API_KEY}&query=${query}`);
-            if( shows.data.results.length===0){ console.log("no results!"); setSugestion({})}
-            else {
-                console.log(shows.data);
-                const similar = await axios.get(`${BASE_URL}tv/${shows.data.results[0].id}${API_KEY}&query=${query}`);
-                console.log("SIMILAR"+similar);
+            
+            if( shows.data.results.length===0){
+                setSugestion({});   console.log("no results!");
+            } else { //assign the data of the best match
                 setSugestion(shows.data.results[0])
             }   
         } catch (error) {
             console.log("error:"+error);  
         }
         
+    }
+    async function getRecommandations(id) {
+        const resRecommendations = await axios.get(`${BASE_URL}tv/${id}//recommendations${API_KEY}`);
+        setRecommandations(resRecommendations.data.results.slice(0,5));
+        console.log(recommenadations)
+        return resRecommendations;     
     }
 
     function onSubmitSearach(e) {
@@ -45,6 +51,7 @@ export function App () {
         }
         //commit sugestion
         else {
+            getRecommandations(sugestion.id);
             setShow(sugestion);
             setSearch("");
             setSugestion({})
@@ -73,7 +80,7 @@ export function App () {
             </Show>
         </main>
         <aside>
-            - LIST OF VIDEOS
+            <Recommandations recs={recommenadations}/>
         </aside>
         <footer>
             <div><p>made by <strong>Michal Rucinski</strong></p></div>
