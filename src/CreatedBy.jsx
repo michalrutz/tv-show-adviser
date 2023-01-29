@@ -5,6 +5,7 @@ export function CreatedBy({created_by}) {
         if(created_by){ 
             for (let index = 0; index < created_by.length; index++) {
                 if(index===created_by.length-1 && index>0) { list.push("and"); }
+                else if(index!==created_by.length-1 && index>0) { list.push(","); }
                 list.push(created_by[index].name);
             }}
         return list;     

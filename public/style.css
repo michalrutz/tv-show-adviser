@@ -34,13 +34,15 @@ form {
     justify-content: center;
 }
 input {
+    max-width:80vw;
+    min-width:25vw;
     font-family:'Poppins', sans-serif ;
     border: 0.1rem solid rgb(255, 255, 255);
     border-radius: 0.5rem;
     outline: rgba(0, 0, 0, 0.2) solid 0.25rem;
 
     font-size: 1.2rem;
-    background: linear-gradient(-45deg, rgba(255, 255, 255, 0.1)15%,  rgba(255, 255, 255, 0.5)80%);
+    background: linear-gradient(-45deg, rgba(255, 255, 255, 0.1)25%,  rgba(255, 255, 255, 0.5)80%);
     background-size: 400% 400%;
 
     padding: 0.1rem;
@@ -92,7 +94,7 @@ main{
     margin-top: 14rem;
 }
 article{
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(15,20,10,0.6) 15%, rgba(5,5,0,0.7) 60% 100%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 45%, rgba(15,20,10,0.6) 70%, rgba(5,5,0,0.7) 90% 100%);
     padding: 4vw; /* 100% + padding = ponad 100%!!! */
     border-radius: 0.2rem;
 }
