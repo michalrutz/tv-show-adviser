@@ -1,0 +1,14 @@
+
+return (<>
+    {recs.length!==0 ? ((array)=>{
+    for (let i = 0; i < array.length; i++) {
+    return(
+        <a href="#wrapper" className={"thumb"} id={reco.id} key={reco.id} onClick={onClickRec}>
+            <img className={"thumb"} src={`${BASE_URL_IMG}w500${reco.backdrop_path}`} alt={reco.name} />
+        </a>)     
+    } 
+    } 
+    )(recs)
+        : ""}    
+</>)
+}

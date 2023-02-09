@@ -42,7 +42,7 @@ input {
     outline: rgba(0, 0, 0, 0.2) solid 0.25rem;
 
     font-size: 1.2rem;
-    background: linear-gradient(-45deg, rgba(192, 139, 139, 0.6)25%,  rgba(255, 255, 255, 0.5)80%);
+    background: linear-gradient(-45deg, rgba(209, 255, 205, 0.6)25%,  rgba(255, 255, 255, 0.5)80%);
     background-size: 400% 400%;
 
     padding: 0.1rem;
@@ -100,7 +100,7 @@ article{
 }
 h1{
     font-family: 'Playfair Display', serif;
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight:400;
     margin: 0 0 0 0;
     padding: 0 0 0 0;
@@ -130,13 +130,26 @@ aside{
 }
 
 .thumb {
+    background-color: red;
     max-width: 100vw;
-    opacity: 0.85;
-    transition: opacity 1s;
+    opacity: 0.9;
+    transition: saturate 0.5s;
+    -webkit-transition: 0.5s -webkit-filter linear;
+    -moz-transition: 0.5s -moz-filter linear;
+    -moz-transition: 0.5s filter linear;
+    -ms-transition: 0.5s -ms-filter linear;
+    -o-transition: 0.5s -o-filter linear;
+    transition: 0.5s filter linear, 0.5s -webkit-filter linear, opacity 1s;
 }
 .thumb:hover {
     opacity: 1;
-    transition: opacity 1s;
+    filter: saturate(1.2);
+    -webkit-transition: 1s -webkit-filter linear;
+    -moz-transition: 1s -moz-filter linear;
+    -moz-transition: 1s filter linear;
+    -ms-transition: 1s -ms-filter linear;
+    -o-transition: 1s -o-filter linear;
+    transition: 1s filter linear, 1s -webkit-filter linear, opacity 1s;
 }
 
 footer {

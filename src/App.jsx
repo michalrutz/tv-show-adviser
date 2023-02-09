@@ -82,7 +82,7 @@ export function App () {
                 <input id="search" type="text" name="search"
                     onChange={(e)=>onChangeSearch(e)} 
                     value={search}
-                    autoFocus autocomplete="off"
+                    autoFocus autoComplete="off"
                     style={feedback ? {borderColor:"white"} : {borderColor: "rgba(150, 0, 0, 0.6)", animation:"none"}}
                 />
                 { feedback ? "": <p className="sugestion">no match found</p>}
