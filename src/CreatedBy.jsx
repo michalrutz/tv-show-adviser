@@ -10,8 +10,6 @@ export function CreatedBy({created_by}) {
             }}
         return list;     
     }
-    console.log(authors(created_by));
-
     return <div className="detail">
         <p>createdby: <strong>{authors(created_by).join(" ")}</strong></p>
     </div>

@@ -12,7 +12,14 @@ export function App () {
     const [feedback, setFeedback] = useState(true);
 
     async function getPopularShows () {     //get top 20 popular shows
-        const top = await axios.get(`${BASE_URL}tv/popular${API_KEY}`);
+        const minNumOfVotes = "vote_count.gte=2000" //minimal number of votes
+        let year = new Date().getFullYear()
+        const month = new Date().getMonth()
+        if ( month === 0 ){ year = year -2 } else { year = year -1 }
+        const lastYear = "air_date.gte="+year
+
+        const top = await axios.get(`${BASE_URL}discover/tv${API_KEY}&${minNumOfVotes}&sort_by=vote_average.desc&page=1&${lastYear}`)
+
         if (top.data.results.length!==0) {  //check if the array is empty
             getShowById(top.data.results[0].id)
         }
@@ -28,8 +35,7 @@ export function App () {
             setSearch("");
             setSugestion({})
             setFeedback(true)
-            console.log(newShow);
-            console.log("SUCCESSFUL REQUEST by ID")
+            console.log("SUCCESSFUL REQUEST by SHOW's ID")
         }    
     }
     async function getRecommandations(id) {
