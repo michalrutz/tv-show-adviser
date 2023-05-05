@@ -122,7 +122,7 @@ aside{
     justify-content: center;
     align-content: center;
     flex-flow: wrap;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 25%, rgba(15,20,10,0.6) 45%, rgba(5,5,0,0.7) 90% 100%);0
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 5%, rgba(15,20,10,0.6) 15%, rgba(5,5,0,0.7) 90% 100%);0
 }
 .gallery a{
     display: flex;
